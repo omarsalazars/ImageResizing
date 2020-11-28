@@ -1,3 +1,5 @@
+#define cimg_use_jpeg
+#define cimg_use_png
 #include "CImg.h"
 #include <iostream>
 #include <cmath>
