@@ -15,25 +15,25 @@ make
 
 ## Results
 #### Original Image
-[Original Image](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/img.png)
+![Original Image](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/img.jpg)
 
 #### Augmented Zone
-[Augmented Zone](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/aux.png)
+![Augmented Zone](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/aux.png)
 
 #### Nearest Neighbor
-[Nearest Neighbor](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/nearest.png)
+![Nearest Neighbor](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/nearest.png)
 
 #### Average
-[Average](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/promedio.png)
+![Average](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/promedio.png)
 
 #### Bilineal Interpolation
-[Bilineal Interpollation](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/bilineal.png)
+![Bilineal Interpollation](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/bilineal.png)
 
 #### Bicubic Interpolation
-[BicubicInterpolation](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/bicubicia.png)
+![BicubicInterpolation](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/bicubica.png)
 
 #### Bi-5 Interpolation
-[Bi-5 Interpolation](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/quinta.png)
+![Bi-5 Interpolation](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/quinta.png)
 
 #### Bi-10 Interpolation
-[Bi-10 Interpolation](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/decima.png)
+![Bi-10 Interpolation](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/decima.png)
