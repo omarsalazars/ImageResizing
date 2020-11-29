@@ -5,6 +5,10 @@ Image interpollation using these methods:
 * Bicubic Interpolation
 * Average
 
+## Dependencies
+* libjpeg
+* libpng
+
 ## Run
 ```
 git clone git@github.com:omarsalazars/BicubicInterpolation.git
