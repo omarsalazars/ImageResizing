@@ -1,218 +1,131 @@
 #define cimg_use_jpeg
 #define cimg_use_png
 #include "CImg.h"
+#include "AugmentedImage.h"
 #include <iostream>
 #include <cmath>
 #include <fstream>
 #include <iomanip>
+#include <cstdlib>
 
 using namespace cimg_library;
 using namespace std;
 
-int incrementoX=4,incrementoY=4,regionX,regionY;
-int iniX=0,iniY=0;
+const char* instructions = R"(Usage:
+./interpolation <image_path> <initialX> <initialY> <finalX> <finalY> [incrementX] [incrementY]
 
-CImg<unsigned char> image("Imagen1/img.jpg"),*region,*aumentada;
+Params:
+char* image_path - Relative or absolute path to the image.
+int initialX - X axis coordinate of the upper-left corner of rectangle. Default value: 100.
+int initialY - Y axis coordinate of the upper-left corner of rectangle. Default value: 100.
+int finalX - X axis coordinate of the bottom-right corner of rectangle. Should be greater than initialX. Default value: 200.
+int finalY - Y axis coordinate of the bottom right corner of rectangle. Should be greater than initialY. Default value: 200.
+int incrementX - X axis increment of the image. Default value: 4 <optional>
+int incrementY - Y axis increment of the image. Default value: 4 <optional>
 
-void  Aumentada()
-{
-    int width=(regionX-iniX)+((regionX-iniX-1)*incrementoX),
-    height=(regionY-iniY)+((regionY-iniY-1)*incrementoY);
-    cout<<"Width new: "<<width<<endl<<"Height new: "<<height<<endl;
-    aumentada=new CImg<unsigned char>(width,height,image.depth(),image.spectrum(),0);
-    int auxX=iniX,auxY=iniY;
-    for(int y=0;y<aumentada->height() && auxY<regionY;y+=incrementoY+1)
-    {
-        for(int x=0;x<aumentada->width() && auxX<regionX;x+=incrementoX+1)
-        {
-            for(int z=0;z<aumentada->depth();z++)
-            {
-                for(int c=0;c<aumentada->spectrum();c++)
-                {
-                        (*aumentada)(x,y,z,c)=image(auxX,auxY,z,c);
-                }
-            }
-            auxX++;
-        }
-        auxY++;
-        auxX=iniX;
-    }
+    InitialX/Y
+        ----------------
+        [              ]
+        ----------------
+                        FinalX/Y
+)";
+
+CImg<unsigned char> originalImage;
+AugmentedImage augmentedImage;
+
+const char* defaultImage = "Imagen1/img.jpg";
+int defaultInitialX = 100;
+int defaultInitialY = 100;
+int defaultFinalX = 120;
+int defaultFinalY = 120;
+int defaultIncrementX = 4;
+int defaultIncrementY = 4;
+
+void die(const char* errorMessage){
+    cerr << errorMessage << endl;
+    cerr << instructions << endl;
+    exit(1);
 }
 
-void init()
+void init(int argc, char* argv[])
 {
-    regionX=200;
-    regionY=200;
-    iniX=100;
-    iniY=100;
-    cout<<"Ancho: "<<image.width()<<endl<<"Altura: "<<image.height()<<endl;
-    cout<<"espectro: "<<image.spectrum()<<endl;
-    //fstream f("arc.txt",ios::out);
-    int width=(regionX-iniX),cont=0,
-    height=(regionY-iniY);
-    region=new CImg<unsigned char>(width,height,image.depth(),image.spectrum(),0);
-    int auxX=iniX,auxY=iniY;
-    for(int y=0;y<region->height() && auxY<regionY;y++)
-    {
-        for(int x=0;x<region->width() && auxX<regionX;x++)
-        {
-                for(int z=0;z<region->depth();z++)
-                {
-                    //f<<"{ x="<<setw(2)<<x<<" y="<<setw(2)<<y<<" ";
-                    for(int c=0;c<region->spectrum();c++)
-                    {
-                        (*region)(x,y,z,c)=image(auxX,auxY,z,c);
-                        //f<<setw(3)<<(int)image(auxX,auxY,z,c)<<" ";
-                    }
-                    //f<<"},  ";
-                }
-                auxX++;
-                cont++;
-        }
-        //f<<"\n";
-        auxX=iniX;
-        auxY++;
-    }
-    //f.close();
-    Aumentada();
-}
+    int size = argc;
 
-double Lagrange(double x,int n,double *xs,double *fx)
-{
-    double P=0;
-    for(int i=0;i<n;i++)
-    {
-        double d=1,k=1;
-        for(int j=0;j<n;j++)
-        {
-            if(i==j) continue;
-            k*=(double)x-xs[j];
-            d*=(double)xs[i]-xs[j];
-        }
-        P+=(k/d)*fx[i];
-    }
-    if(P>255)
-        return 255;
-    if(P<0)
-        return 0;
-    return P;
-}
-
-CImg<unsigned char> NInterpolacion(int grado)
-{
-    CImg<unsigned char> img=*aumentada;
-    //EJES X
-    for(int y=0;y<img.height();y+=(incrementoY+1))
-    {
-        for(int x=0;x+(incrementoX*grado+grado)<img.width();x+=(incrementoX+1))
-        {
-            double xs[grado+1],fx[3][grado+1];int aux=0;
-            for(int i=x;i<=x+(incrementoX*grado+grado);i+=incrementoX+1)
-            {
-                xs[aux]=i;
-                for(int c=0;c<img.spectrum();c++)
-                    fx[c][aux]=img(i,y,0,c);
-                aux++;
-            }
-            for(int i=x;i<=x+(incrementoX*grado+grado);i++)
-            {
-                for(int c=0;c<img.spectrum();c++)
-                {
-                    img(i,y,0,c)=Lagrange(i,grado+1,xs,fx[c]);
-                }
-            }
+    if(size >= 2){
+        if(strcmp(argv[1], "--help") == 0){
+            cout << instructions << endl;
+            exit(0);
         }
     }
 
-    //EJES Y
+    if(size != 6 && size != 8 && size != 1){
+        die("Incorrect number of arguments.");
+    }
 
-    for(int x=0;x<img.width();x++)
-    {
-        for(int y=0;y+(incrementoY*grado+grado)<img.height();y+=(incrementoY+1))
-        {
-            double xs[grado+1],fx[3][grado+1];int aux=0;
-            for(int i=y;i<=y+(incrementoY*grado+grado);i+=incrementoY+1)
-            {
-                xs[aux]=i;
-                for(int c=0;c<img.spectrum();c++)
-                    fx[c][aux]=img(x,i,0,c);
-                aux++;
-            }
-            for(int i=y;i<=y+incrementoY*grado+grado;i++)
-            {
-                for(int c=0;c<img.spectrum();c++)
-                {
-                    img(x,i,0,c)=Lagrange(i,grado+1,xs,fx[c]);
-                }
-            }
+    const char* filename = size == 1 ? defaultImage : argv[1];
+    int initialX = defaultInitialX;
+    int initialY = defaultInitialY;
+    int finalX = defaultFinalX;
+    int finalY = defaultFinalY;
+    int incrementX = defaultIncrementX;
+    int incrementY = defaultIncrementY;
+
+    originalImage.assign(filename);
+
+    // Parse arguments
+    if(size >= 6){
+        // Validate arguments are in range
+        if(atoi(argv[2])<0 || atoi(argv[3])<0 || atoi(argv[4])<0 || atoi(argv[5])<0) 
+            die("All arguments must be poisitive.");
+        
+        initialX = atoi(argv[2]);
+        initialY = atoi(argv[3]);
+        finalX = atoi(argv[4]);
+        finalY = atoi(argv[5]);
+
+        if(initialX > originalImage.width()) die("initialX must be shorter than max image width");
+        if(initialY > originalImage.height()) die("initialY must be shorter than max image height");
+        if(finalX > originalImage.width()) die("finalX must be shorter than max image width");
+        if(finalY > originalImage.height()) die("finalY must be shorter than max image height");
+        if(finalX < initialX) die("finalX must be shorter than initialX");
+        if(finalY < initialY) die("finalY must be shorter than initialY");
+
+        if(size == 8){
+            if(atoi(argv[6])<0 || atoi(argv[7])<0)
+                die("All arguments must be positive.");
+            incrementX = atoi(argv[6]);
+            incrementY = atoi(argv[7]);
         }
     }
-    return img;
+
+    augmentedImage = (AugmentedImage)originalImage.get_crop( initialX, initialY, finalX, finalY );
+    augmentedImage.setIncrementX(incrementX);
+    augmentedImage.setIncrementY(incrementY);
+
+    cout << "Width: " << originalImage.width() << endl;
+    cout << "Height: " << originalImage.height() << endl;
+    cout << "Spectrum: " << originalImage.spectrum() << endl;
+
+    cout << "cropped Width: " << augmentedImage.width() << endl;
+    cout << "cropped Height: " << augmentedImage.height() << endl;
+    cout << "cropped Spectrum: " << augmentedImage.spectrum() << endl;
 }
 
-CImg<unsigned char> Promedio(CImg<unsigned char> i1,CImg<unsigned char> i2)
+int main(int argc, char* argv[])
 {
-    int width=(regionX-iniX)+((regionX-iniX-1)*incrementoX),
-    height=(regionY-iniY)+((regionY-iniY-1)*incrementoY);
-    CImg<unsigned char> img(width,height,image.depth(),image.spectrum());
-    for(int y=0;y<img.height();y++)
-        for(int x=0;x<img.width();x++)
-            for(int c=0;c<img.spectrum();c++)
-            {
-                int m=i1(x,y,0,c),m2=i2(x,y,0,c);
-                img(x,y,0,c)=(m+m2)/2;
-            }
-    return img;
+    init(argc, argv);
 
-}
+    CImg<unsigned char> grade2 = augmentedImage.NLagrangeInterpolation(2);
+    CImg<unsigned char> grade3 = augmentedImage.NLagrangeInterpolation(3);
 
-CImg<unsigned char> NearestNeighbor()
-{
-    int width=(regionX-iniX)+((regionX-iniX-1)*incrementoX),
-    height=(regionY-iniY)+((regionY-iniY-1)*incrementoY);
-    CImg<unsigned char> img(width,height,image.depth(),image.spectrum(),0);
-    int auxX=iniX,auxY=iniY;
-    for(int y=0;y<img.height() && auxY<regionY;y++)
-    {
-        for(int x=0;x<img.width() && auxX<regionX;x++)
-        {
-            for(int z=0;z<img.depth();z++)
-            {
-                for(int c=0;c<img.spectrum();c++)
-                {
-                        img(x,y,z,c)=image(auxX,auxY,z,c);
-                }
-            }
-            if(x%(incrementoX+1)==0)
-                auxX++;
-        }
-        if(y%(incrementoY+1)==0)
-            auxY++;
-        auxX=iniX;
-    }
-    return img;
-}
-
-int main()
-{
-    cimg::imagemagick_path("C:\\Program Files\\ImageMagick-7.0.8-Q16\\convert.exe",true);
-    cimg::graphicsmagick_path("C:\\Program Files\\GraphicsMagick-1.3.31-Q16\\gm.exe",true);
-    init();
-
-    CImg<unsigned char> bilineal=NInterpolacion(2);
-    CImg<unsigned char> bicubica=NInterpolacion(3);
-    CImg<unsigned char> nearest=NearestNeighbor();
-    CImg<unsigned char> promedio=Promedio(bilineal,bicubica);
-    CImg<unsigned char> quinta=NInterpolacion(5);
-    CImg<unsigned char> decima=NInterpolacion(10);
-
-    CImgDisplay main_disp(image,"Original");
-    CImgDisplay draw_dispR(*aumentada,"Aumentada");
-    CImgDisplay draw_dispA(promedio,"Promedios");
-    CImgDisplay draw_dispJ(bicubica,"Interpolacion bicubica");
-    CImgDisplay draw_dispK(bilineal,"Interpolacion bilineal");
-    CImgDisplay draw_dispN(nearest,"Nearest Neighbor");
-    CImgDisplay draw_dispAux(*region,"aux");
+    CImgDisplay main_disp(originalImage,"Original");
+    CImgDisplay draw_dispA(augmentedImage, "Augmented");
+    CImgDisplay draw_dispB(grade2, "Lagrange Interpolation grade 2");
+    CImgDisplay draw_dispC(grade3, "Lagrange Interpolation grade 3");
+    CImgDisplay draw_dispD(augmentedImage.NLagrangeInterpolation(4), "Lagrange Interpolation grade 4");
+    CImgDisplay draw_dispE(augmentedImage.NearestNeighbor(), "Nearest Neighbor");
+    CImgDisplay draw_dispF(augmentedImage.EmptySpace(), "Expanded");
+    CImgDisplay draw_dispG(augmentedImage.Average(grade2, grade3), "Interpolation grade 2 and 3 average");
 
     /*bilineal.save("bilineal.png");
     bicubica.save("bicubica.png");
@@ -226,7 +139,6 @@ int main()
     while (!main_disp.is_closed()){
         main_disp.wait();
     }
-
 
     return 0;
 }
