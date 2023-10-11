@@ -59,7 +59,7 @@ void init(int argc, char* argv[])
         }
     }
 
-    if(size != 6 && size != 8 && size != 1){
+    if(size != 6 && size != 8 && size != 1 && size != 2){
         die("Incorrect number of arguments.");
     }
 
@@ -141,7 +141,7 @@ int main(int argc, char* argv[])
     // grade10.save((folder+"grade10.png").c_str());
     // average.save((folder+"average.png").c_str());
     // nearestNeighbor.save((folder+"nearestNeighbor.png").c_str());
-    // augmentedImage.save((folder+"nearestNeighbor.png").c_str());
+    // augmentedImage.save((folder+"augmented.png").c_str());
     // emptySpace.save((folder+"emptySpace.png").c_str());
 
     while (!main_disp.is_closed()){
