@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iomanip>
 #include <cstdlib>
+#include <string>
 
 using namespace cimg_library;
 using namespace std;
@@ -33,11 +34,11 @@ int incrementY - Y axis increment of the image. Default value: 4 <optional>
 CImg<unsigned char> originalImage;
 AugmentedImage augmentedImage;
 
-const char* defaultImage = "Imagen1/img.jpg";
+const char* defaultImage = "Image1/img.jpg";
 int defaultInitialX = 100;
 int defaultInitialY = 100;
-int defaultFinalX = 120;
-int defaultFinalY = 120;
+int defaultFinalX = 200;
+int defaultFinalY = 200;
 int defaultIncrementX = 4;
 int defaultIncrementY = 4;
 
@@ -117,24 +118,31 @@ int main(int argc, char* argv[])
 
     CImg<unsigned char> grade2 = augmentedImage.NLagrangeInterpolation(2);
     CImg<unsigned char> grade3 = augmentedImage.NLagrangeInterpolation(3);
+    CImg<unsigned char> grade5 = augmentedImage.NLagrangeInterpolation(5);
+    CImg<unsigned char> grade10 = augmentedImage.NLagrangeInterpolation(10);
+    CImg<unsigned char> average = augmentedImage.Average(grade2, grade3);
+    CImg<unsigned char> emptySpace = augmentedImage.EmptySpace();
+    CImg<unsigned char> nearestNeighbor = augmentedImage.NearestNeighbor();
 
     CImgDisplay main_disp(originalImage,"Original");
     CImgDisplay draw_dispA(augmentedImage, "Augmented");
     CImgDisplay draw_dispB(grade2, "Lagrange Interpolation grade 2");
     CImgDisplay draw_dispC(grade3, "Lagrange Interpolation grade 3");
-    CImgDisplay draw_dispD(augmentedImage.NLagrangeInterpolation(4), "Lagrange Interpolation grade 4");
-    CImgDisplay draw_dispE(augmentedImage.NearestNeighbor(), "Nearest Neighbor");
-    CImgDisplay draw_dispF(augmentedImage.EmptySpace(), "Expanded");
-    CImgDisplay draw_dispG(augmentedImage.Average(grade2, grade3), "Interpolation grade 2 and 3 average");
+    CImgDisplay draw_dispD(grade5, "Lagrange Interpolation grade 5");
+    CImgDisplay draw_dispE(grade10, "Lagrange Interpolation grade 10");
+    CImgDisplay draw_dispF(nearestNeighbor, "Nearest Neighbor");
+    CImgDisplay draw_dispG(emptySpace, "Expanded");
+    CImgDisplay draw_dispH(average, "Interpolation grade 2 and 3 average");
 
-    /*bilineal.save("bilineal.png");
-    bicubica.save("bicubica.png");
-    nearest.save("nearest.png");
-    promedio.save("promedio.png");
-    quinta.save("quinta.png");
-    decima.save("decima.png");
-    aumentada->save("aumentada.png");
-    region->save("aux.png");*/
+    // string folder = "Image1/";
+    // grade2.save((folder+"grade2.png").c_str());
+    // grade3.save((folder+"grade3.png").c_str());
+    // grade5.save((folder+"grade5.png").c_str());
+    // grade10.save((folder+"grade10.png").c_str());
+    // average.save((folder+"average.png").c_str());
+    // nearestNeighbor.save((folder+"nearestNeighbor.png").c_str());
+    // augmentedImage.save((folder+"nearestNeighbor.png").c_str());
+    // emptySpace.save((folder+"emptySpace.png").c_str());
 
     while (!main_disp.is_closed()){
         main_disp.wait();
