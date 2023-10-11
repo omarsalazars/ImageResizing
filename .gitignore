@@ -1,0 +1,7 @@
+*.out
+interpolation
+main
+CImg.h
+*dll
+arc.txt
+.vscode
