@@ -82,7 +82,7 @@ make
 ![Augmented Zone](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image3/augmented.png)
 
 #### Expanded Image
-![Expanded Image](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image1/emptySpace.png)
+![Expanded Image](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image3/emptySpace.png)
 
 #### Nearest Neighbor
 ![Nearest Neighbor](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image3/nearestNeighbor.png)
