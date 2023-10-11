@@ -34,7 +34,7 @@ make
 ![Bilineal Interpollation Grade 2](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image1/grade2.png)
 
 #### Bicubic Interpolation
-![Bilineal Interpolation Grade 3](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/grade3.png)
+![Bilineal Interpolation Grade 3](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image1/grade3.png)
 
 #### Bi-5 Interpolation
 ![Bilineal Interpolation Grade 5](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image1/grade5.png)
@@ -60,7 +60,7 @@ make
 ![Bilineal Interpollation Grade 2](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image2/grade2.png)
 
 #### Bicubic Interpolation
-![Bilineal Interpolation Grade 3](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen2/grade3.png)
+![Bilineal Interpolation Grade 3](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image2/grade3.png)
 
 #### Bi-5 Interpolation
 ![Bilineal Interpolation Grade 5](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image2/grade5.png)
@@ -85,7 +85,7 @@ make
 ![Bilineal Interpollation Grade 2](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image3/grade2.png)
 
 #### Bicubic Interpolation
-![Bilineal Interpolation Grade 3](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen3/grade3.png)
+![Bilineal Interpolation Grade 3](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image3/grade3.png)
 
 #### Bi-5 Interpolation
 ![Bilineal Interpolation Grade 5](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image3/grade5.png)
