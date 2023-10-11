@@ -1,9 +1,8 @@
 # Image Interpollation
 Image interpollation using these methods:
 * Nearest Neighbor
-* Bilineal Interpolation
-* Bicubic Interpolation
-* Average
+* Bilineal Lagrange Interpolation of multiple grades
+* Average between 2 images
 
 ## Dependencies
 * libjpeg
@@ -31,13 +30,13 @@ make
 ![Average](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/promedio.png)
 
 #### Bilineal Interpolation
-![Bilineal Interpollation](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/bilineal.png)
+![Bilineal Interpollation Grade 2](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/bilineal.png)
 
 #### Bicubic Interpolation
-![BicubicInterpolation](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/bicubica.png)
+![Bilineal Interpolation Grade 3](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/bicubica.png)
 
 #### Bi-5 Interpolation
-![Bi-5 Interpolation](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/quinta.png)
+![Bilineal Interpolation Grade 5](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/quinta.png)
 
 #### Bi-10 Interpolation
-![Bi-10 Interpolation](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/decima.png)
+![Bilineal Interpolation Grade 10](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Imagen1/decima.png)
