@@ -1,5 +1,5 @@
-# Image Interpollation
-Image interpollation using these methods:
+# Image Resizing
+Image Resizing using these methods:
 * Nearest Neighbor
 * Bilineal Lagrange Interpolation of multiple grades
 * Average between 2 images
