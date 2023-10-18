@@ -1,6 +1,7 @@
 *.out
 interpolation
 main
+ImageResizing
 CImg.h
 *dll
 arc.txt

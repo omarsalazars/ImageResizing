@@ -1,7 +1,7 @@
 # Image Resizing
 Image Resizing using these methods:
 * Nearest Neighbor
-* Bilineal Lagrange Interpolation of multiple grades
+* Bilinear Lagrange Interpolation of multiple grades
 * Average between 2 images
 
 ## Dependencies
@@ -33,17 +33,17 @@ make
 #### Average
 ![Average](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image1/average.png)
 
-#### Bilineal Interpollation Grade 2
-![Bilineal Interpollation Grade 2](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image1/grade2.png)
+#### Bilinear Interpollation Grade 2
+![Bilinear Interpollation Grade 2](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image1/grade2.png)
 
-#### Bilineal Interpolation Grade 3
-![Bilineal Interpolation Grade 3](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image1/grade3.png)
+#### Bilinear Interpolation Grade 3
+![Bilinear Interpolation Grade 3](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image1/grade3.png)
 
-#### Bilineal Interpolation Grade 5
-![Bilineal Interpolation Grade 5](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image1/grade5.png)
+#### Bilinear Interpolation Grade 5
+![Bilinear Interpolation Grade 5](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image1/grade5.png)
 
-#### Bilineal Interpolation Grade 10
-![Bilineal Interpolation Grade 10](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image1/grade10.png)
+#### Bilinear Interpolation Grade 10
+![Bilinear Interpolation Grade 10](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image1/grade10.png)
 
 
 ### Example 2
@@ -62,17 +62,17 @@ make
 #### Average
 ![Average](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image2/average.png)
 
-#### Bilineal Grade 2 Interpolation
-![Bilineal Interpollation Grade 2](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image2/grade2.png)
+#### Bilinear Interpolation Grade 2
+![Bilinear Interpollation Grade 2](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image2/grade2.png)
 
-#### Bilineal Grade 3 Interpolation
-![Bilineal Interpolation Grade 3](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image2/grade3.png)
+#### Bilinear Interpolation Grade 3
+![Bilinear Interpolation Grade 3](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image2/grade3.png)
 
-#### Bilineal Grade 5 Interpolation
-![Bilineal Interpolation Grade 5](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image2/grade5.png)
+#### Bilinear Interpolation Grade 5
+![Bilinear Interpolation Grade 5](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image2/grade5.png)
 
-#### Bilineal Grade 10 Interpolation
-![Bilineal Interpolation Grade 10](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image2/grade10.png)
+#### Bilinear Interpolation Grade 10
+![Bilinear Interpolation Grade 10](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image2/grade10.png)
 
 ### Example 3
 #### Original Image
@@ -90,14 +90,14 @@ make
 #### Average
 ![Average](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image3/average.png)
 
-#### Bilineal Interpollation Grade 2
-![Bilineal Interpollation Grade 2](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image3/grade2.png)
+#### Bilinear Interpollation Grade 2
+![Bilinear Interpollation Grade 2](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image3/grade2.png)
 
-#### Bilineal Interpolation Grade 3
-![Bilineal Interpolation Grade 3](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image3/grade3.png)
+#### Bilinear Interpolation Grade 3
+![Bilinear Interpolation Grade 3](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image3/grade3.png)
 
-#### Bilineal Interpolation Grade 5
-![Bilineal Interpolation Grade 5](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image3/grade5.png)
+#### Bilinear Interpolation Grade 5
+![Bilinear Interpolation Grade 5](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image3/grade5.png)
 
-#### Bilineal Interpolation Grade 5
-![Bilineal Interpolation Grade 5](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image3/grade10.png)
+#### Bilinear Interpolation Grade 10
+![Bilinear Interpolation Grade 5](https://github.com/omarsalazars/BicubicInterpolation/blob/master/Image3/grade10.png)
