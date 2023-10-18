@@ -1,6 +1,9 @@
+#include "CImg.h"
 #include "AugmentedImage.h"
+#include "DisplayedImage.h"
 #include "MathUtil.h"
 #include <iostream>
+#include <string>
 
 using namespace std;
 using namespace cimg_library;
@@ -22,7 +25,7 @@ int AugmentedImage::newHeight(){
 /**
 * Returns augmented image without any processing. Fills empty space with black pixels.
 */
-CImg<unsigned char> AugmentedImage::EmptySpace()
+DisplayedImage AugmentedImage::EmptySpace()
 {
     CImg<unsigned char> expandedImage(this->newWidth(), this->newHeight(), this->depth(), this->spectrum(), 0);
     for(int y=0;y<expandedImage.height();y++)
@@ -39,25 +42,25 @@ CImg<unsigned char> AugmentedImage::EmptySpace()
             }
         }
     }
-    return expandedImage;
+    return DisplayedImage(expandedImage, "emptySpace.png", "Empty Space");
 }
 
 /**
 * Returns the augmented image filling black spaces with the specified grade of Lagrange interpolation.
 */
-CImg<unsigned char> AugmentedImage::NLagrangeInterpolation(int grade)
+DisplayedImage AugmentedImage::NLagrangeInterpolation(int grade)
 {
-    CImg<unsigned char> expandedImage = this->EmptySpace();
+    CImg<unsigned char> expandedImage = this->EmptySpace().image;
     int xAxisCalculatedZone = grade*incrementX;
     int yAxisCalculatedZone = grade*incrementY;
 
     if(expandedImage.width() < xAxisCalculatedZone){
         cerr<<"Impossible to interpolate. Expanded Image width should be larger than interpolation grade*incrementX"<<endl;
-        return expandedImage;
+        return DisplayedImage(expandedImage, "grade"+to_string(grade)+".png", "Grade "+grade);
     }
     if(expandedImage.height() < yAxisCalculatedZone){
         cerr<<"Impossible to interpolate. Expanded Image height should be larger than interpolation grade*incrementY"<<endl;
-        return expandedImage;
+        return DisplayedImage(expandedImage, "grade"+to_string(grade)+".png", "Grade "+grade);
     }
     
     // X Axis
@@ -114,13 +117,13 @@ CImg<unsigned char> AugmentedImage::NLagrangeInterpolation(int grade)
             }
         }
     }
-    return expandedImage;
+    return DisplayedImage(expandedImage, "grade"+to_string(grade)+".png", "Grade "+to_string(grade));
 }
 
 /**
 * Returns augmented image filling black spaces with the average color of the neighbors.
 */
-CImg<unsigned char> AugmentedImage::Average(CImg<unsigned char> i1,CImg<unsigned char> i2)
+DisplayedImage AugmentedImage::Average(CImg<unsigned char> i1,CImg<unsigned char> i2)
 {
     CImg<unsigned char> averageImage(this->newWidth(), this->newHeight(), this->depth(), this->spectrum());
     for(int y=0; y<averageImage.height(); y++)
@@ -130,13 +133,13 @@ CImg<unsigned char> AugmentedImage::Average(CImg<unsigned char> i1,CImg<unsigned
                 int m=i1(x,y,0,c),m2=i2(x,y,0,c);
                 averageImage(x,y,0,c)=(m+m2)/2;
             }
-    return averageImage;
+    return DisplayedImage(averageImage, "average.png", "Average");
 }
 
 /**
 * Returns augmented image filling black spaces with the value of the nearest neighbor.
 */
-CImg<unsigned char> AugmentedImage::NearestNeighbor()
+DisplayedImage AugmentedImage::NearestNeighbor()
 {
     CImg<unsigned char> expandedImage(this->newWidth(), this->newHeight(), this->depth(), this->spectrum(), 0);
     for(int y=0;y<expandedImage.height();y++)
@@ -152,7 +155,8 @@ CImg<unsigned char> AugmentedImage::NearestNeighbor()
             }
         }
     }
-    return expandedImage;
+
+    return DisplayedImage(expandedImage, "nearestNeighbor.png", "Nearest Neighbor");
 }
 
 void AugmentedImage::dumpProps(){
@@ -171,6 +175,7 @@ void AugmentedImage::setIncrementY(int incrementY){
 int AugmentedImage::getIncrementX(){
     return this->incrementX;
 }
+
 int AugmentedImage::getIncrementY(){
     return this->incrementY;
 }
